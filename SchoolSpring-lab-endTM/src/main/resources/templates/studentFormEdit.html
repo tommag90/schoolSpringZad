@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<body>
+
+    <div layout:fragment="content">
+    <div th:include="menuFragment" ></div>
+    	<br/><br/>
+	   			<form action="UpdateStudent" method="POST">
+					<table>
+						<tr>
+							<td>imię:</td><td><input type="text" name="studentName" th:value="${studentName}"/></td>
+							<td><input type="text" name="oldStudentName" th:value="${studentName}" disabled="disabled"/></td>
+						</tr>
+						<tr>
+							<td>nazwisko:</td><td><input type="text" name="studentSurname" th:value="${studentSurname}"/></td>
+							<td><input type="text" name="oldStudentSurname" th:value="${studentSurname}" disabled="disabled"/></td>
+						</tr>
+						<tr>
+							<td>pesel:</td><td><input type="text" name="studentPesel" th:value="${studentPesel}"/></td>
+							<td><input type="text" name="oldStudentPesel" th:value="${studentPesel}" disabled="disabled"/></td>
+						</tr>
+						<tr>
+							<td>klasa:</td><td><select class="form-control" name="schoolClassStudent" id="schoolClassStudent">
+											    <option value="-1">---</option>
+											    <option selected="hidden" th:value="${schoolClassStudent.id}" th:text="${schoolClassStudent.profile}"></option>
+											    <option th:each="schoolClass: ${schoolClasses}" th:value="${schoolClass.id}" th:text="${schoolClass.profile} + ', ' + ${schoolClass.startYear} + ', ' + ${schoolClass.currentYear}"></option>
+											    </select>
+							</td>
+							<td><select class="form-control" name="oldSchoolClassStudent" id="schoolClassStudent" disabled="disabled">
+											    <option value="-1">---</option>
+												<option selected="hidden" th:value="${schoolClassStudent.id}" th:text="${schoolClassStudent.profile}"></option>
+											    <option th:each="schoolClass: ${schoolClasses}" th:value="${schoolClass.id}" th:text="${schoolClass.profile} + ', ' + ${schoolClass.currentYear}" ></option>
+											    </select>
+							</td>
+						</tr>
+					</table><br/><BR/>
+					<input type="hidden" name="studentId" th:value="${studentId}" />
+					<input type="submit" value="Modyfikuj"/>
+				</form>
+    </div>
+
+</body>
+</html>
+
+
